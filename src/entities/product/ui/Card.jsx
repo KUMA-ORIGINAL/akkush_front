@@ -26,7 +26,7 @@ const ProductCard = ({ product }) => {
 	return (
 		<div
 			key={product.id}
-			className="relative w-full flex flex-col bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow md:w-64 h-70 group cursor-pointer"
+			className="relative w-full flex flex-col bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow h-full group cursor-pointer"
 			onClick={openProduct}
 			onKeyDown={(event) => {
 				if (event.key === "Enter" || event.key === " ") {
@@ -50,13 +50,13 @@ const ProductCard = ({ product }) => {
 					}}
 				/>
 			</Link>
-			<div className="p-4 flex flex-col gap-2 flex-1">
+			<div className="p-3 sm:p-4 flex flex-col gap-2 flex-1">
 				<Link
 					to={productUrl}
 					className="no-underline"
 					onClick={(event) => event.stopPropagation()}
 				>
-					<h3 className="text-lg font-serif   text-black font-semibold truncate leading-tight">
+					<h3 className="text-base sm:text-lg font-serif   text-black font-semibold truncate leading-tight">
 						{product.name}
 					</h3>
 					<p className="text-sm text-gray-500 mt-1 flex items-start gap-[2px] font-medium tracking-wide">
@@ -69,7 +69,7 @@ const ProductCard = ({ product }) => {
 					</p>
 				</Link>
 				<div
-					className="mt-auto flex items-center justify-between"
+					className="mt-auto flex items-center gap-2"
 					onClick={(event) => event.stopPropagation()}
 				>
 					{/* <button className="px-4 py-1 bg-blue-600 border text-violet hover:bg-violet transition-all duration-300 hover:text-white border-violet rounded-lg flex items-center gap-2">

@@ -44,37 +44,39 @@ export const CartButton = ({ product, variant = 'card' }) => {
   }, [quantity, product]);
 
   return (
-    <div>
+    <div className={isDetail ? '' : 'flex-1 min-w-0'}>
       {quantity === 0 ? (
         <button
           className={
             isDetail
               ? 'min-w-[260px] rounded-full bg-milk px-8 py-3 text-base font-semibold text-white transition-all duration-300 hover:bg-black'
-              : 'px-4 py-1 border text-black hover:bg-black transition-all duration-300 hover:text-white border-black rounded-lg flex items-center gap-2'
+              : 'w-full flex items-center justify-center gap-1.5 whitespace-nowrap px-3 py-2 text-sm font-medium tracking-wide text-white bg-black rounded-lg transition-colors duration-300 hover:bg-[#333] active:scale-[0.98]'
           }
           onClick={() => handleAction(() => setQuantity(1))}
         >
-          {!isDetail && <ShoppingCartIcon className="text-inherit" />}
+          {!isDetail && (
+            <ShoppingCartIcon sx={{ fontSize: 16 }} className="text-inherit shrink-0" />
+          )}
           {isDetail ? 'Положить товар в корзину' : 'В корзину'}
         </button>
       ) : (
-        <div className="flex items-center gap-2 rounded border border-violet">
+        <div className="w-full flex items-center justify-between gap-1 rounded-lg border border-black px-1">
           <IconButton
-            className="border border-black p-1 rounded-lg"
+            size="small"
             onClick={() => handleAction(() => setQuantity((prev) => Math.max(prev - 1, 0)))}
             aria-label="Уменьшить"
           >
-            <IndeterminateCheckBoxRoundedIcon className="text-black" />
+            <IndeterminateCheckBoxRoundedIcon sx={{ fontSize: 22 }} className="text-black" />
           </IconButton>
 
-          <span className="text-lg font-semibold text-black">{quantity}</span>
+          <span className="text-base font-semibold text-black">{quantity}</span>
 
           <IconButton
-            className="p-1 rounded-lg"
+            size="small"
             onClick={() => handleAction(() => setQuantity((prev) => prev + 1))}
             aria-label="Добавить"
           >
-            <AddBoxIcon className="text-black" />
+            <AddBoxIcon sx={{ fontSize: 22 }} className="text-black" />
           </IconButton>
         </div>
       )}

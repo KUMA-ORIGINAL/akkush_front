@@ -273,7 +273,7 @@ export function CatalogPage() {
 			value={sortBy}
 			onChange={(e) => setSortBy(e.target.value as SortOption)}
 			size="small"
-			className="min-w-[200px] bg-white"
+			className="min-w-[180px] w-full sm:w-auto bg-white"
 		>
 			{SORT_OPTIONS.map((option) => (
 				<MenuItem
@@ -335,8 +335,8 @@ export function CatalogPage() {
 	)
 
 	return (
-		<div className="min-h-screen w-full p-6 md:p-10">
-			<h2 className="font-serif text-4xl text-black text-center mb-8 tracking-tight">
+		<div className="min-h-screen w-full px-4 py-6 md:p-10">
+			<h2 className="font-serif text-2xl sm:text-3xl md:text-4xl text-black text-center mb-6 md:mb-8 tracking-tight">
 				Каталог Косметики
 			</h2>
 
@@ -383,7 +383,7 @@ export function CatalogPage() {
 
 			{/* Mobile sort + active filter chips */}
 			<div className="flex flex-wrap items-center gap-2 mb-4">
-				<div className="md:hidden">{sortControl}</div>
+				<div className="md:hidden w-full sm:w-auto">{sortControl}</div>
 				{selectedCategories.map((id) => (
 					<Chip
 						key={id}
@@ -416,38 +416,47 @@ export function CatalogPage() {
 				anchor="left"
 				open={isFilterOpen}
 				onClose={() => setIsFilterOpen(false)}
+				// Render inside #root so Tailwind's `important: "#root"` utilities apply.
+				ModalProps={{ disablePortal: true }}
 			>
-				<div className="w-[300px] p-4">
-					<div className="flex justify-between items-center pt-2 pb-2">
-						<h3 className="font-bold text-lg">Фильтр</h3>
-						<IconButton onClick={() => setIsFilterOpen(false)}>
+				<div className="flex flex-col h-full w-[85vw] max-w-[340px]">
+					<div className="flex justify-between items-center px-5 py-4 border-b border-gray-200">
+						<h3 className="font-bold text-lg tracking-wide uppercase">Фильтр</h3>
+						<IconButton
+							onClick={() => setIsFilterOpen(false)}
+							aria-label="Закрыть фильтр"
+						>
 							<Close />
 						</IconButton>
 					</div>
-					{renderFilterTree()}
-					{priceControl}
-					{resetButton}
-					<Button
-						fullWidth
-						variant="contained"
-						onClick={() => setIsFilterOpen(false)}
-						sx={{
-							marginTop: "12px",
-							borderRadius: 0,
-							background: "#1A1A1A",
-							boxShadow: "none",
-							letterSpacing: "0.15em",
-							textTransform: "uppercase",
-							fontSize: "11px",
-							"&:hover": { background: "#333" }
-						}}
-					>
-						Показать ({filteredProducts.length})
-					</Button>
+					<div className="flex-1 overflow-y-auto px-5 py-4">
+						{renderFilterTree()}
+						{priceControl}
+						{resetButton}
+					</div>
+					<div className="px-5 py-4 border-t border-gray-200">
+						<Button
+							fullWidth
+							variant="contained"
+							onClick={() => setIsFilterOpen(false)}
+							sx={{
+								borderRadius: 0,
+								background: "#1A1A1A",
+								boxShadow: "none",
+								letterSpacing: "0.15em",
+								textTransform: "uppercase",
+								fontSize: "11px",
+								paddingY: "12px",
+								"&:hover": { background: "#333" }
+							}}
+						>
+							Показать ({filteredProducts.length})
+						</Button>
+					</div>
 				</div>
 			</Drawer>
 
-			<div className="flex flex-col md:flex-row md:justify-between gap-[50px] mt-6 items-start">
+			<div className="flex flex-col md:flex-row md:justify-between gap-6 lg:gap-[50px] mt-6 items-start">
 				<div className="hidden md:block w-64 p-6 bg-white border border-gray-100 flex-grow-0 sticky top-6 max-h-[calc(100vh-3rem)] overflow-auto">
 					<h3 className="font-bold text-lg mb-2">Фильтр</h3>
 					{renderFilterTree()}
@@ -460,7 +469,7 @@ export function CatalogPage() {
 						Найдено товаров: {filteredProducts.length}
 					</p>
 					{filteredProducts.length > 0 ? (
-						<div className="flex flex-wrap gap-[10px]">
+						<div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4">
 							{filteredProducts.map((product) => (
 								<ProductCard
 									key={product.id}
