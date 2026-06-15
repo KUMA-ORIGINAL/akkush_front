@@ -97,8 +97,11 @@ export function Header() {
 						{/* <h3 className="text-black">Ак Куш</h3> */}
 					</Link>
 				</div>
-				<Link to={pathKeys.home()}>
-					<h3 className="text-white uppercase text-[30px] font-play">
+				<Link
+					to={pathKeys.home()}
+					className="absolute left-1/2 -translate-x-1/2 hidden sm:block"
+				>
+					<h3 className="text-white uppercase text-[22px] md:text-[30px] font-play whitespace-nowrap leading-none">
 						Ak Kush
 					</h3>
 				</Link>
